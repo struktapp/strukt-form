@@ -1,0 +1,33 @@
+{
+    "name": "strukt/form",
+    "description": "Form Validation",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Strukt\\": "src/Strukt/"
+        },
+        "files":["src/helpers.php"]
+    },
+    "autoload-dev": {
+        "psr-4": { 
+            "Payroll\\": "app/src/Payroll" 
+        }
+    },
+    "authors": [
+        {
+            "name": "pitsolu",
+            "email": "pitsolu@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "strukt/contract": "dev-changes",
+        "strukt/base": "dev-changes",
+        "strukt/commons": "dev-changes",
+        "strukt/generator": "dev-changes"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "6.4.x-dev"
+    }
+}
