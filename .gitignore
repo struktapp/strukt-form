@@ -1,2 +1,5 @@
 vendor
 php_errors.log
+.vendor
+.bak
+composer.bak.json

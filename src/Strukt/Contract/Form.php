@@ -21,11 +21,15 @@ abstract class Form{
 	/**
 	* Constructor
 	*
-	* @param \Strukt\Http\Request|Array $request 
+	* @param \Strukt\Http\Request|array $request 
 	*/
-	public function __construct(Request|Array $request){
+	public function __construct(Request|array $request){
 
 		$this->request = $request;
+		$properties = get_class_vars(get_called_class());
+		foreach($properties as $property=>$value)
+			if($property!="request")
+				@$this->$property = is_array($request)?$request[$property]:$request->get($property);
 	}
 
 	/**
@@ -97,6 +101,9 @@ abstract class Form{
 			return $validators->level(2, noPrefix:true);
 		});
 
-		return $props->yield();
+		return [
+			"success"=>arr($props->level())->are()->all(true),
+			"messages"=>$props->yield()
+		];
 	}
 }

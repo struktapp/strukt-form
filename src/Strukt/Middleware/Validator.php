@@ -38,11 +38,13 @@ class Validator implements MiddlewareInterface{
 				$request->request->set($name, $val);
 		}
 
-		$class = reg(sprintf("nr.%s.frm.%s", $tokq->get("module"), $tokq->get("form")));
+		$class = config("user.form");
+		if(notnull($class)){
 
-		$messages = \Strukt\Ref::create($class)->makeArgs([$request])->method("validate")->invoke();
-		if(!$messages["success"])
-			$response = new Raise("Bad Request", 400);
+			$messages = \Strukt\Ref::create($class)->makeArgs([$request])->method("validate")->invoke();
+			if(!$messages["success"])
+				$response = new Raise("Bad Request", 400);
+		}
 			
 	
 		return $next($request, $response);

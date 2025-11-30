@@ -28,59 +28,7 @@ if(helper_add("form")){
 	 */
 	function form(string $which, Request $request):AbstractForm{
 
-		$alias = new class($which){
-
-			use Strukt\Traits\FacetHelper;
-
-			private $which;
-
-			/**
-			 * @param string $which
-			 */
-			public function __construct(string $which){
-
-				$this->which = $which;
-			}
-
-			/**
-			 * @return string
-			 */
-			public function valid():string{
-
-				$module_alias = null;
-				$class_name = null;
-				$facet_alias = null;
-				$which = null;
-
-				$qualified = $this->isQualifiedAlias($this->which);
-
-				if($qualified){
-
-					list($_, $facet_alias, $_) = str($this->which)->split(".");
-					if(str($facet_alias)->equals("frm"))
-						return $this->which;
-
-					raise(sprintf("Invalid form[%s]!", $this->which));
-				}
-
-				if(negate($qualified))
-					if(preg_match("/^[a-z]{2}\.\w+$/", $this->which))
-						list($module_alias, $class_name) = str($this->which)->split(".");
-
-				if(notnull($module_alias) && notnull($class_name))
-					$which = str($module_alias)
-						->concat(str("frm")->prepend("."))
-						->concat(str($class_name)->prepend("."))
-						->yield();
-
-				if(is_null($which))
-					raise(sprintf("Invalid form[%s]!", $this->which));
-
-				return $which;
-			}
-		};
-
-		return core($alias->valid(), [$request]);
+		//
 	}
 }
 
