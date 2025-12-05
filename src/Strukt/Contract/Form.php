@@ -55,7 +55,8 @@ abstract class Form{
 		$ref = ref(get_called_class());
 		$props = arr($ref->getRef()->getProperties())
 				->map(fn($k,$v)=>[$v->getName()=>$v->getDocComment()])
-				->level(2, noPrefix:true);
+				->level()->noPrefix()->yield();
+				// ->level(2, noPrefix:true);
 
 		$self = $this;
 		$props = arr($props)->each(function($param, $docblock) use($self){
@@ -98,11 +99,12 @@ abstract class Form{
 				return [$name=>validator($name, $value)];
 			});
 
-			return $validators->level(2, noPrefix:true);
+			// return $validators->level(2, noPrefix:true);
+			return $validators->level(2)->noPrefix()->yield();
 		});
 
 		return [
-			"success"=>arr($props->level())->are()->all(true),
+			"success"=>arr($props->level()->yield())->are()->all(true),
 			"messages"=>$props->yield()
 		];
 	}
