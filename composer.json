@@ -1,0 +1,80 @@
+{
+    "name": "strukt/form",
+    "description": "Rule based form definition, validation, and error reporting, built on the Strukt rules engine.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "strukt/base": "dev-main",
+        "strukt/contract": "dev-main",
+        "strukt/rules": "dev-main"
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Strukt\\Form\\": "src/Strukt/Form/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Strukt\\Form\\Fixtures\\": "tests/Fixtures/",
+            "Tests\\": "tests/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../rules",
+            "options": {
+                "symlink": false,
+                "versions": {
+                    "strukt/rules": "dev-main"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "../../strukt3/contract",
+            "options": {
+                "symlink": false,
+                "versions": {
+                    "strukt/contract": "dev-main"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "../../strukt3/base",
+            "options": {
+                "symlink": false,
+                "versions": {
+                    "strukt/base": "dev-main"
+                }
+            }
+        }
+    ],
+    "scripts": {
+        "test": "pest",
+        "test:coverage": "pest --coverage",
+        "lint": "find src tests -name '*.php' -print0 | xargs -0 -n1 php -l"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "pitsolu",
+            "email": "pitsolu@gmail.com"
+        }
+    ]
+}
