@@ -39,7 +39,7 @@
         },
         {
             "type": "path",
-            "url": "../../strukt3/contract",
+            "url": "../../strukt4/contract",
             "options": {
                 "symlink": false,
                 "versions": {
@@ -49,7 +49,7 @@
         },
         {
             "type": "path",
-            "url": "../../strukt3/base",
+            "url": "../../strukt4/base",
             "options": {
                 "symlink": false,
                 "versions": {

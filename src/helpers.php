@@ -35,7 +35,7 @@ if (!function_exists('form') && function_exists('helper_add') && helper_add('for
             ));
         }
 
-        $form = new $class();
+        $form = function_exists('app') ? app($class) : new $class();
 
         return $submit ? $form->submit($values) : $form->setValues($values);
     }
